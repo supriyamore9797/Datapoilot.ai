@@ -1,0 +1,14 @@
+[theme]
+base = "light"
+primaryColor = "#4F46E5"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F4F8"
+textColor = "#1F2937"
+
+[server]
+# Uploaded datasets are processed in memory only. This is the upload ceiling in MB
+# and should stay in step with MAX_FILE_MB in src/config.py.
+maxUploadSize = 50
+
+[browser]
+gatherUsageStats = false
