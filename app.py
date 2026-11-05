@@ -87,7 +87,7 @@ def home() -> None:
         st.info("Start by uploading a file or loading a sample dataset above. Nothing is loaded yet.")
 
     st.subheader("Workflow")
-    steps = ["Upload", "Explore", "Clean", "Visualise", "Student Analysis", "Train models", "Export report"]
+    steps = ["Upload", "Explore", "Clean", "Visualise", "Student Cohorts", "Admission Calling", "Train models", "Export report"]
     for column, (number, label) in zip(st.columns(len(steps)), enumerate(steps, start=1)):
         column.markdown(f'<div class="dp-step"><b>{number}.</b> {label}</div>', unsafe_allow_html=True)
     st.caption("DataPilot AI reports facts computed from your data and clearly labelled recommendations. It is not an autonomous AI scientist.")
@@ -103,6 +103,7 @@ pages = [
     st.Page("pages/2_Clean_Data.py", title="Clean Data", icon="\U0001F9F9"),
     st.Page("pages/3_Visual_Analytics.py", title="Visual Analytics", icon="\U0001F4C8"),
     st.Page("pages/6_Student_Analysis.py", title="Student Data Analysis", icon="\U0001F393"),
+    st.Page("pages/7_Admission_Analysis.py", title="Admission Calling Analysis", icon="\U0001F4DE"),
     st.Page("pages/4_ML_Studio.py", title="ML Studio", icon="\U0001F916"),
     st.Page("pages/5_Reports.py", title="Reports", icon="\U0001F4C4"),
 ]

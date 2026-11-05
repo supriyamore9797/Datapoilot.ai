@@ -20,6 +20,7 @@ from src.utils import human_bytes
 
 _CSS = """
 <style>
+.main .block-container { max-width: 100% !important; padding-left: 2rem !important; padding-right: 2rem !important; padding-top: 2rem !important; }
 .dp-hero { border: 1px solid #E5E7EB; border-radius: 12px; padding: 1.1rem 1.4rem; background: #F8F9FC; margin-bottom: 0.75rem; }
 .dp-hero h1 { margin: 0; font-size: 1.8rem; color: #1F2937; padding: 0; }
 .dp-hero p { margin: 0.3rem 0 0 0; color: #4B5563; font-size: 0.98rem; }
