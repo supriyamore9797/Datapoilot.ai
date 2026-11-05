@@ -76,12 +76,35 @@ def data_badges() -> None:
         )
 
 
+_home_page: Any = None
+
+
+def set_home_page(page: Any) -> None:
+    """Register the Streamlit Page object corresponding to the Home view."""
+    global _home_page
+    _home_page = page
+
+
+def get_home_page() -> Any:
+    """Return the registered Home Page object or create a matching Page target."""
+    global _home_page
+    if _home_page is not None:
+        return _home_page
+    return st.Page(lambda: None, title="Home", icon="\U0001F3E0", default=True, url_path="home")
+
+
 def require_data() -> pd.DataFrame:
     """Return the working DataFrame, or show a helpful empty state and stop the page."""
     state.init_state()
     if not state.has_data():
         st.info("No dataset is loaded yet. Go to **Home**, upload a CSV/Excel file or load a built-in sample dataset, then come back here.")
-        st.page_link("app.py", label="Go to Home", icon="\U0001F3E0")
+        target = get_home_page()
+        try:
+            st.page_link(target, label="Go to Home", icon="\U0001F3E0")
+        except Exception:
+            if st.button("Go to Home", icon="\U0001F3E0"):
+                st.switch_page(target)
+        show_footer()
         st.stop()
     data_badges()
     return state.get_working()

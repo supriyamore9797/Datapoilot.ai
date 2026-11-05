@@ -94,8 +94,11 @@ def home() -> None:
     ui.show_footer()
 
 
+home_page = st.Page(home, title="Home", icon="\U0001F3E0", default=True, url_path="home")
+ui.set_home_page(home_page)
+
 pages = [
-    st.Page(home, title="Home", icon="\U0001F3E0", default=True, url_path="home"),
+    home_page,
     st.Page("pages/1_Explore_Data.py", title="Explore Data", icon="\U0001F50E"),
     st.Page("pages/2_Clean_Data.py", title="Clean Data", icon="\U0001F9F9"),
     st.Page("pages/3_Visual_Analytics.py", title="Visual Analytics", icon="\U0001F4C8"),

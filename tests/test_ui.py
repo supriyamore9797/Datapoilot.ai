@@ -30,3 +30,37 @@ def test_show_footer_renders_expected_markup():
         assert "Developed by Supriya S More" in rendered_html
         assert kwargs.get("unsafe_allow_html") is True
 
+
+def test_home_page_registration_and_fallback():
+    dummy_page = object()
+    ui.set_home_page(dummy_page)
+    assert ui.get_home_page() is dummy_page
+
+    ui.set_home_page(None)
+    fallback = ui.get_home_page()
+    assert fallback is not None
+
+
+def test_require_data_handles_empty_dataset_with_home_link():
+    from streamlit.runtime.scriptrunner_utils.exceptions import StopException
+
+    # Reset any state
+    ui.set_home_page("dummy_home_page")
+    with patch("src.state.has_data", return_value=False), \
+         patch("src.state.init_state"), \
+         patch("streamlit.info") as mock_info, \
+         patch("streamlit.page_link") as mock_page_link, \
+         patch("src.ui.show_footer") as mock_footer, \
+         patch("streamlit.stop", side_effect=StopException) as mock_stop:
+
+        try:
+            ui.require_data()
+        except StopException:
+            pass
+
+        mock_info.assert_called_once()
+        mock_page_link.assert_called_once_with("dummy_home_page", label="Go to Home", icon="🏠")
+        mock_footer.assert_called_once()
+        mock_stop.assert_called_once()
+
+
